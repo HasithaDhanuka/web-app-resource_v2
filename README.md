@@ -2,12 +2,12 @@
 
 # web_app
 //      flutter run -d chrome --web-renderer html      
-//      flutter run -d chrome --web-renderer html --profile
+//      flutter build web --release
 //      flutter build web --release --web-renderer html
 
 # Web_canverskit
-//      flutter run -d chrome --web-renderer canvaskit
-//      flutter build web --web-renderer canvaskit --release
+//      flutter run -d chrome --wasm
+//      flutter build web --release --wasm
 //      flutter build web --web-renderer canvaskit
 //       <base href="/shop_owner/">
 

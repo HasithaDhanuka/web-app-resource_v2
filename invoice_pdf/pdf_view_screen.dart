@@ -2,13 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:universal_html/universal_html.dart' as html;
 import 'package:web_app/Utils/colors.dart';
 import 'package:web_app/Utils/timedate_conventer.dart';
 import 'package:web_app/model/food.dart';
 import 'package:animated_expandable_fab/animated_expandable_fab.dart';
-
-import 'dart:io';
-import 'dart:typed_data';
 
 //import 'package:pdfx/pdfx.dart';
 
@@ -35,12 +33,49 @@ class InvoiceView extends StatelessWidget {
 
     final int totalAmount = orderPrice + deliveryCharge;
 
-    Future<void> _downloadImage({required Uint8List bytes}) async {
-      print("is save");
-      File('my_image.jpg').writeAsBytes(bytes);
+    // Capture the invoice widget and download the resulting PNG in the browser.
+    Future<void> _downloadInvoicePng() async {
+      try {
+        final invoicePng = await screenshotController.capture(pixelRatio: 2);
+        if (invoicePng == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Could not capture the invoice.')),
+          );
+          return;
+        }
 
-      // await WebImageDownloader.downloadImageFromUInt8List(
-      //     uInt8List: bytes, name: "test_image", imageType: ImageType.jpeg);
+        final now = DateTime.now();
+        final customerName = userName
+            .trim()
+            .replaceAll(RegExp(r'[<>:"/\\|?*\x00-\x1F]'), '-');
+        final year = (now.year % 100).toString().padLeft(2, '0');
+        final month = now.month.toString().padLeft(2, '0');
+        final day = now.day.toString().padLeft(2, '0');
+        final hour = now.hour.toString().padLeft(2, '0');
+        final minute = now.minute.toString().padLeft(2, '0');
+        final second = now.second.toString().padLeft(2, '0');
+        // Replace filename-invalid slashes and colons with hyphens.
+        final fileName =
+            '${customerName}_date($year-$month-$day)_time($hour-$minute-$second).png';
+        final blob = html.Blob([invoicePng], 'image/png');
+        final objectUrl = html.Url.createObjectUrlFromBlob(blob);
+        html.AnchorElement(href: objectUrl)
+          ..download = fileName
+          ..click();
+        Future<void>.delayed(const Duration(seconds: 1), () {
+          html.Url.revokeObjectUrl(objectUrl);
+        });
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Invoice PNG downloaded.')),
+        );
+      } catch (error) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not download the invoice PNG.')),
+        );
+        debugPrint('Invoice PNG download failed: $error');
+      }
     }
 
 /* ***************************************************************
@@ -51,20 +86,11 @@ class InvoiceView extends StatelessWidget {
         openIcon: Icon(Icons.add),
         closeIcon: Icon(Icons.close),
         children: [
-          // ActionButton(
-          //   text: Text("Save "),
-          //   onPressed: () async {
-          //     final invoiceImg = await screenshotController.capture();
-
-          //     if (invoiceImg == null) {
-          //       print("img Is Null");
-          //       return;
-          //     }
-          //     print("is save okpen");
-          //     // _downloadImage(bytes: invoiceImg);
-          //   },
-          //   icon: Icon(Icons.save_alt_outlined),
-          // ),
+          ActionButton(
+            text: const Text("Invoice PNG"),
+            onPressed: _downloadInvoicePng,
+            icon: const Icon(Icons.image_outlined),
+          ),
           ActionButton(
             text: Text("Go Home "),
             onPressed: () {
