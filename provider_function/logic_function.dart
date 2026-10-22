@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:web_app/model/food.dart';
@@ -7,20 +6,26 @@ import 'package:web_app/model/food.dart';
 class FoodItemProperty extends ChangeNotifier {
   late String getItemName;
   late int getItemPrice;
+  late int getItemCount;
   late String getItemUrl;
   late String getItemID;
+  String getDescription = "";
 
   void setItemProperty({
     required String itemName,
     required int itemPrice,
+    required int itemCount,
     required String itemUrl,
     required String itemID,
+    String? description,
     // required Future Allet,
   }) {
     getItemName = itemName;
     getItemPrice = itemPrice;
+    getItemCount = itemCount;
     getItemUrl = itemUrl;
     getItemID = itemID;
+    getDescription = description ?? "";
 
     notifyListeners();
   }
@@ -31,6 +36,7 @@ class FoodItemProperty extends ChangeNotifier {
 class TextFieldChanger extends ChangeNotifier {
   bool bItemNameValidate = false;
   bool bItemPriceValidate = false;
+  bool bItemCountValidate = false;
   bool bItemUrlValidate = false;
 
   bool getUserNameValidate = false;
@@ -45,6 +51,11 @@ class TextFieldChanger extends ChangeNotifier {
 
   void itemPriceChanger(bool priceValidate) {
     bItemPriceValidate = priceValidate;
+    notifyListeners();
+  }
+
+  void itemCountChanger(bool countValidate) {
+    bItemCountValidate = countValidate;
     notifyListeners();
   }
 
@@ -103,6 +114,30 @@ class OrderFoodItems extends ChangeNotifier {
   List<FoodItem> get getOrderList => listOfOrder;
 }
 
+// // **************************************************************************
+// // ##################    Delete Order Income   ##############################
+// class DeleteOrdersIncome extends ChangeNotifier {
+//   //late List<int> listOfOrderPrices = [];
+//   int ntotalPrice = 0;
+//   bool isHistory = true;
+
+//   bool isSwitchON({required bool isOn}) {
+//     isHistory = isOn;
+//     notifyListeners();
+//     return isHistory;
+//   }
+
+//   void setTotlePrice({required int price}) {
+//     ntotalPrice = price;
+//     print("222222");
+
+//     print("notifire toatle price :: ${ntotalPrice}");
+//     notifyListeners();
+//   }
+
+//   int get getTotalPrice => ntotalPrice;
+// }
+
 // *****************************************************************
 // ##################    USER  ORDERS   ############################
 
@@ -118,37 +153,35 @@ class UserOrdersFind extends ChangeNotifier {
   int get totalOrdersCount => lengthOfOrders;
 }
 
+// *****************************************************************
+// ##################    GET LOCAL IMAGE   ############################
 class GetImgLocal extends ChangeNotifier {
   Uint8List imagedata = Uint8List(0);
   String imageName = "";
   bool isImageFile = false;
   bool isEnableCreateButton = true;
 
-  Future<bool?> getImageLocal() async {
-    print("function entering of Img picker");
-
-    final pickFileResult = await FilePicker.platform.pickFiles();
-    if (pickFileResult == null) {
+  Future<bool> getImageLocal() async {
+    final resultFile = await FilePicker.pickFile(type: FileType.image);
+    if (resultFile == null) {
       isImageFile = false;
+      imagedata = Uint8List(0);
+      imageName = "";
       createButtonEnable();
-      return isImageFile;
+      return false;
     }
 
-    PlatformFile resultFile = pickFileResult.files.first;
-
-    imagedata = resultFile.bytes!;
+    imagedata = await resultFile.readAsBytes();
     imageName = resultFile.name;
-
     isImageFile = true;
-
-    print("file name :: ${resultFile.name}");
-    print("file name :: ${resultFile.extension}");
     notifyListeners();
-    return isImageFile;
+    return true;
   }
 
   void getImageClear() {
     isImageFile = false;
+    imagedata = Uint8List(0);
+    imageName = "";
     notifyListeners();
   }
 
@@ -165,4 +198,25 @@ class GetImgLocal extends ChangeNotifier {
   Uint8List get fileBytes => imagedata;
   bool get isFile => isImageFile;
   String get fileName => imageName;
+}
+
+class DatabaseClassifier extends ChangeNotifier {
+  List<String> classifier = [
+    "OtherItems",
+    "GrainsItems",
+    "PowderItems",
+    "CookingItems"
+  ];
+  List<bool> isSelected = [true, false, false, false];
+  int currentIndex = 1;
+  String collectionPath = "";
+  void getCurrentItem(int index) {
+    collectionPath = classifier[index];
+    currentIndex = index;
+    //final getItemIndex = isSelected[index];
+
+    notifyListeners();
+  }
+
+  String get getCollectionPath => collectionPath;
 }

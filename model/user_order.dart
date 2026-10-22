@@ -7,7 +7,9 @@ class UserOrder {
   late final String userAddruss;
   late final int userPostalCode;
   late final int userTotalPrice;
+  final int deliveryCharge;
   late int userPhoneNumber;
+  late bool? isDelivery;
   late Timestamp? timestamp;
   late final List<FoodItem> userOrders;
 
@@ -17,7 +19,9 @@ class UserOrder {
     required this.userAddruss,
     required this.userPostalCode,
     required this.userTotalPrice,
+    this.deliveryCharge = 0,
     required this.userPhoneNumber,
+    this.isDelivery,
     this.timestamp,
     required this.userOrders,
   });
@@ -28,11 +32,11 @@ class UserOrder {
         "userAddruss": userAddruss,
         "userPostalCode": userPostalCode,
         "userTotalPrice": userTotalPrice,
+        "deliveryCharge": deliveryCharge,
         "userPhoneNumber": userPhoneNumber,
-        "timeStamp": FieldValue.serverTimestamp(),
+        "isDelivery": isDelivery,
+        "timeStamp": timestamp ?? FieldValue.serverTimestamp(),
         "userOrders": userOrders.map((e) => e.toJson()).toList(),
-
-        //   userOrders.map((e) => e.toJson()).toList(),
       };
 
   factory UserOrder.fromMap(Map<String, dynamic> data) {
@@ -42,7 +46,11 @@ class UserOrder {
       userAddruss: data["userAddruss"],
       userPostalCode: data["userPostalCode"],
       userTotalPrice: data["userTotalPrice"],
+      // Keep the previous invoice behavior for older orders without this field.
+      deliveryCharge: (data["deliveryCharge"] as num?)?.toInt() ??
+          (data["isDelivery"] == true ? 200 : 0),
       userPhoneNumber: data["userPhoneNumber"],
+      isDelivery: data["isDelivery"],
       timestamp: data["timeStamp"],
       userOrders: List<FoodItem>.from(
           data["userOrders"].map((item) => FoodItem.fromMap(item))),
