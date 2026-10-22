@@ -14,7 +14,7 @@ import 'package:web_app/Utils/timedate_conventer.dart';
 import 'package:web_app/Utils/view_wrapper.dart';
 import 'package:web_app/firebase/firebase_userOrder.dart';
 import 'package:web_app/invoice_pdf/pdf_api.dart';
-import 'package:web_app/invoice_pdf/pdf_view_screen.dart';
+//import 'package:web_app/invoice_pdf/pdf_view_screen.dart';
 import 'package:web_app/model/food.dart';
 import 'package:web_app/model/user_order.dart';
 import 'package:web_app/provider_function/logic_function.dart';
@@ -400,42 +400,42 @@ class _UserOrderCartsState extends State<UserOrderCarts> {
   }
 }
 
-// ***************************************************************//
-// ###################   Get Invoice    ##########################//
-Future<void> getInvoice(
-  BuildContext context, {
-  required int indexNumber,
-  required int userTelephoneNumber,
-  required int orderPrice,
-  required String userName,
-  required String userID,
-  required String userAddrass,
-  required Timestamp timeOfOrder,
-  required List<FoodItem> orders,
-}) async {
-  print('#######  1  #######');
+// // ***************************************************************//
+// // ###################   Get Invoice    ##########################//
+// Future<void> getInvoice(
+//   BuildContext context, {
+//   required int indexNumber,
+//   required int userTelephoneNumber,
+//   required int orderPrice,
+//   required String userName,
+//   required String userID,
+//   required String userAddrass,
+//   required Timestamp timeOfOrder,
+//   required List<FoodItem> orders,
+// }) async {
+//   print('#######  1  #######');
 
-  final getPdf = await PdfApi.genarateInvoice(
-    indexNumber: indexNumber,
-    userTelephoneNumber: userTelephoneNumber,
-    orderPrice: orderPrice,
-    userName: userName,
-    userID: userID,
-    userAddrass: userAddrass,
-    timeOfOrder: timeOfOrder,
-    orders: orders,
-  );
-  print('#######  2  #######');
+//   final getPdf = await PdfApi.genarateInvoice(
+//     indexNumber: indexNumber,
+//     userTelephoneNumber: userTelephoneNumber,
+//     orderPrice: orderPrice,
+//     userName: userName,
+//     userID: userID,
+//     userAddrass: userAddrass,
+//     timeOfOrder: timeOfOrder,
+//     orders: orders,
+//   );
+//   print('#######  2  #######');
 
-//  Navigator.of(context).pop();
+// //  Navigator.of(context).pop();
 
-  print('#######  3  #######');
+//   print('#######  3  #######');
 
-  // PdfApi.saveDocument(pdfBytes: getPdf, userName: userName);
+//   // PdfApi.saveDocument(pdfBytes: getPdf, userName: userName);
 
-  // Navigator.pushNamed(context, '/pdf');
-  // print('#######  4  #######');
-}
+//   // Navigator.pushNamed(context, '/pdf');
+//   // print('#######  4  #######');
+// }
 
 // ***************************************************************//
 // ###################   Delete Order    ##########################//
