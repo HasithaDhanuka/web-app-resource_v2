@@ -4,17 +4,17 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:web_app/Utils/colors.dart';
 import 'package:web_app/Utils/view_wrapper.dart';
 import 'package:web_app/provider_function/logic_function.dart';
+import 'package:web_app/screen/delete_history_view.dart';
 //  import 'package:web_app/screen/about_view.dart';
 //import 'package:web_app/screen/cart_view.dart';
-import 'package:web_app/bottom_bar.dart';
-import 'package:web_app/content_view.dart';
-import 'package:web_app/custom_tab.dart';
+import 'package:web_app/widgets/bottom_bar.dart';
+import 'package:web_app/widgets/content_view.dart';
+import 'package:web_app/widgets/custom_tab.dart';
 import 'package:web_app/screen/create_item_view.dart';
 import 'package:web_app/screen/foodItems_view.dart';
 import 'package:web_app/screen/order_view.dart';
-import 'package:web_app/screen/update_item_view.dart';
 import 'package:web_app/widgets/background.dart';
-import 'custom_tab_bar.dart';
+import 'widgets/custom_tab_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -54,17 +54,24 @@ class _HomePageState extends State<HomePage>
     ContentView(
       tab: const CustomTab(
         isShowCount: false,
-        title: "Update Item",
-      ),
-      content: const UpdateDeleteItem(),
-    ),
-    ContentView(
-      tab: const CustomTab(
-        isShowCount: false,
         title: "Create",
       ),
       content: const CreateItem(),
     ),
+    ContentView(
+        tab: const CustomTab(
+          isShowCount: false,
+          title: "Delete History",
+        ),
+        content: const DeleteHistoryView()),
+
+// ContentView(
+    //   tab: const CustomTab(
+    //     isShowCount: false,
+    //     title: "Update Item",
+    //   ),
+    //   content: const UpdateDeleteItem(),
+    // ),
 
     // ContentView(
     //   tab: const CustomTab(
@@ -194,6 +201,8 @@ class _HomePageState extends State<HomePage>
             ),
             Expanded(
                 child: ScrollablePositionedList.builder(
+                    physics:
+                        const ScrollPhysics(parent: BouncingScrollPhysics()),
                     itemScrollController: _itemScrollController,
                     itemCount: contentViews.length,
                     itemBuilder: (context, index) =>

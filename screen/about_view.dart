@@ -78,7 +78,6 @@ class _AboutViewState extends State<AboutView>
   }
 
   BulletList test() {
-    print("test ok");
     return BulletList(strings: [
       _about_text,
       _about_text,

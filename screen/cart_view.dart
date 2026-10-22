@@ -80,6 +80,8 @@ class _CartViewState extends State<CartView> {
                             userPostalCode:
                                 int.parse(userPostalCodeEditingController.text),
                             userTotalPrice: value.getTotalPrice,
+                            // New orders start with no fee; staff can edit it later.
+                            deliveryCharge: 0,
                             userPhoneNumber: int.parse(
                                 userPhoneNunberEditingController.text),
                             userOrders: value.getOrderList,
