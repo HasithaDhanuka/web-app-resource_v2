@@ -123,7 +123,7 @@ class _CartViewState extends State<CartView> {
     return SizedBox(
       height: 500,
       child: Card(
-        color: Colors.transparent,
+        color: MyColor.myTransparent,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -148,7 +148,7 @@ class _CartViewState extends State<CartView> {
     return SizedBox(
       height: 120,
       child: Card(
-        color: Colors.transparent,
+        color: MyColor.myTransparent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -160,6 +160,11 @@ class _CartViewState extends State<CartView> {
                 child: Image.network(
                   itemUrl,
                   fit: BoxFit.cover,
+                  // Use an HTML image fallback for cross-origin image URLs.
+                  webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.broken_image_outlined,
+                  ),
                 ),
               ),
             ),
@@ -204,7 +209,7 @@ Widget totalPrice(
   return SizedBox(
     height: 100,
     child: Card(
-      color: Colors.transparent,
+      color: MyColor.myTransparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

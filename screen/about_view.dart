@@ -108,7 +108,7 @@ class _AboutViewState extends State<AboutView>
       child: ClipRRect(
         borderRadius: BorderRadius.circular(getImageSize() / 2),
         child: Container(
-          color: Colors.grey,
+          color: MyColor.myGrey,
           child: Center(
               child: Lottie.asset("assets/elepent.json",
                   //controller: create_button_anim,

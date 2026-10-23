@@ -3,12 +3,19 @@ import 'package:flutter/material.dart';
 //  import 'dart:html' as html;
 
 //##############    Canvers kit with Network Image ###############
-Widget netImageView({required imgURL, onTap}) {
+Widget netImageView({required String imgURL, VoidCallback? onTap}) {
   return InkWell(
     onTap: onTap,
     child: Image.network(
       imgURL,
       fit: BoxFit.cover,
+      // Fall back to an HTML image when the browser cannot provide image bytes.
+      webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+      errorBuilder: (context, error, stackTrace) {
+        // Keep the failed-image state visible without logging tokenized URLs.
+        debugPrint('Network image failed to load (${error.runtimeType}).');
+        return const Center(child: Icon(Icons.broken_image_outlined));
+      },
     ),
   );
 }

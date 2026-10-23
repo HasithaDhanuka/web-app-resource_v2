@@ -20,14 +20,14 @@ class CustomTabBar extends StatelessWidget {
         width: screen_width * tabBarScaling,
         child: Theme(
           data: ThemeData(
-              highlightColor: Colors.transparent,
+              highlightColor: MyColor.myTransparent,
               splashColor: const Color.fromARGB(239, 241, 5, 5),
               hoverColor: const Color.fromARGB(19, 250, 3, 3)),
           child: TabBar(
             labelColor: MyColor.myRed,
             unselectedLabelColor: MyColor.myWhite,
             indicatorColor: MyColor.myRed,
-            dividerColor: Colors.transparent,
+            dividerColor: MyColor.myTransparent,
             overlayColor: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.hovered)) {

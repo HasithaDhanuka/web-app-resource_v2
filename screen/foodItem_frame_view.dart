@@ -95,7 +95,10 @@ class FoodTile extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "+ $itemCount",
-                    style: const TextStyle(fontWeight: FontWeight.w700),
+                    style: const TextStyle(
+                      color: MyColor.onSecondary,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),

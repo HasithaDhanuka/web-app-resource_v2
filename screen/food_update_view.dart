@@ -37,7 +37,7 @@ class _FoodUpdateViewState extends State<FoodUpdateView> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
       child: Card(
-        color: Colors.black12,
+        color: MyColor.darkSurface,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -172,7 +172,7 @@ class _FoodUpdateViewState extends State<FoodUpdateView> {
         context: context,
         builder: (context) => AlertDialog(
           shadowColor: MyColor.myOrange,
-          backgroundColor: Colors.black,
+          backgroundColor: MyColor.myBlack,
           title: Text(
             "Change Item Details",
             style: TextStyle(color: MyColor.myOrange),
@@ -253,7 +253,7 @@ class _FoodUpdateViewState extends State<FoodUpdateView> {
                 _descriptionController.clear();
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: MyColor.myTransparent,
                   shape: const StadiumBorder(),
                   side: BorderSide(color: MyColor.myGreen, width: 4)),
               child: Text(

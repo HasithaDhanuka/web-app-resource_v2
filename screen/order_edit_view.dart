@@ -174,9 +174,9 @@ class _OrderEditScreenState extends State<OrderEditScreen>
     final isCustomerTab = _selectedTab == 0;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: MyColor.myBlack,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: MyColor.myBlack,
         foregroundColor: MyColor.myWhite,
         title: const Text('Order Edit'),
         bottom: PreferredSize(
@@ -214,7 +214,7 @@ class _OrderEditScreenState extends State<OrderEditScreen>
                       icon: const Icon(Icons.arrow_back),
                       label: const Text('Back'),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: MyColor.myWhite,
+                        foregroundColor: MyColor.myOrange,
                         side: BorderSide(color: MyColor.myOrange),
                         padding: const EdgeInsets.symmetric(vertical: 15),
                       ),
@@ -236,7 +236,8 @@ class _OrderEditScreenState extends State<OrderEditScreen>
                       label: Text(isCustomerTab ? 'Save Customer' : 'Save Order'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: MyColor.myRed,
-                        foregroundColor: MyColor.myWhite,
+                        foregroundColor: MyColor.onPrimary,
+                        
                         padding: const EdgeInsets.symmetric(vertical: 15),
                       ),
                     ),
@@ -245,12 +246,12 @@ class _OrderEditScreenState extends State<OrderEditScreen>
               ),
             ),
             Material(
-              color: Colors.black,
+              color: MyColor.myBlack,
               child: TabBar(
                 controller: _tabController,
                 indicatorColor: MyColor.myRed,
                 labelColor: MyColor.myRed,
-                unselectedLabelColor: Colors.white70,
+                unselectedLabelColor: MyColor.myWhite70,
                 tabs: const [
                   Tab(
                     icon: Icon(Icons.person),
@@ -356,7 +357,7 @@ class _OrderEditScreenState extends State<OrderEditScreen>
           final line = _orderLines[index];
           final item = line.item;
           return Card(
-            color: Colors.white.withOpacity(0.06),
+            color: MyColor.myWhite.withOpacity(0.06),
             margin: const EdgeInsets.only(bottom: 12),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -379,7 +380,7 @@ class _OrderEditScreenState extends State<OrderEditScreen>
                         const SizedBox(height: 4),
                         Text(
                           '¥${item.itemPrice} each',
-                          style: const TextStyle(color: Colors.white70),
+                          style: const TextStyle(color: MyColor.myWhite70),
                         ),
                       ],
                     ),
@@ -419,9 +420,9 @@ class _OrderEditScreenState extends State<OrderEditScreen>
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text('Items: ¥$itemSubtotal',
-                    style: const TextStyle(color: Colors.white70)),
+                    style: const TextStyle(color: MyColor.myWhite70)),
                 Text('Delivery Charges: ¥$deliveryCharge',
-                    style: const TextStyle(color: Colors.white70)),
+                    style: const TextStyle(color: MyColor.myWhite70)),
                 Text(
                   'Total: ¥$total',
                   style: TextStyle(
@@ -444,7 +445,7 @@ class _OrderEditScreenState extends State<OrderEditScreen>
     final fallback = Container(
       width: 68,
       height: 68,
-      color: Colors.white12,
+      color: MyColor.myWhite12,
       alignment: Alignment.center,
       child: Icon(Icons.restaurant, color: MyColor.myOrange, size: 30),
     );
@@ -463,6 +464,8 @@ class _OrderEditScreenState extends State<OrderEditScreen>
         width: 68,
         height: 68,
         fit: BoxFit.cover,
+        // Fall back to an HTML image when browser byte access is blocked.
+        webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
         errorBuilder: (context, error, stackTrace) => fallback,
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
@@ -508,10 +511,10 @@ class _OrderEditScreenState extends State<OrderEditScreen>
       },
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.white70),
+        labelStyle: const TextStyle(color: MyColor.myWhite70),
         prefixIcon: Icon(icon, color: MyColor.myOrange),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.05),
+        fillColor: MyColor.myWhite.withOpacity(0.05),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: MyColor.myOrange.withOpacity(0.7)),

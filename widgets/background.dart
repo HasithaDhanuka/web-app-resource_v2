@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_app/Utils/colors.dart';
 
 class Background extends StatelessWidget {
   const Background(
@@ -17,7 +18,7 @@ class Background extends StatelessWidget {
     return ShaderMask(
       shaderCallback: (bounds) {
         return const LinearGradient(
-          colors: [Colors.black12, Colors.black87],
+          colors: [MyColor.myBlack12, MyColor.myBlack87],
           begin: Alignment.center,
           end: Alignment.bottomCenter,
         ).createShader(bounds);
@@ -29,7 +30,8 @@ class Background extends StatelessWidget {
           image: AssetImage(backgroundURL),
           fit: BoxFit.cover,
           colorFilter:
-              ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.darken),
+              ColorFilter.mode(
+                  MyColor.myBlack.withOpacity(0.3), BlendMode.darken),
         )),
         //child: child,
       ),
