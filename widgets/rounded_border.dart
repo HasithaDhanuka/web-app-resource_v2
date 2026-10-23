@@ -9,7 +9,7 @@ Widget roundedBorder({
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
     child: Container(
-      color: Colors.transparent,
+      color: MyColor.myTransparent,
       height: height,
       child: InputDecorator(
         decoration: InputDecoration(

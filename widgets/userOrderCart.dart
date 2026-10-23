@@ -176,7 +176,7 @@ class _UserOrderCartsState extends State<UserOrderCarts> {
     return SizedBox(
       height: 500,
       child: Card(
-        color: Colors.transparent,
+        color: MyColor.myTransparent,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -310,8 +310,8 @@ class _UserOrderCartsState extends State<UserOrderCarts> {
                 "isDeliver": isDeliver,
               });
             }),
-            backgroundColor: Color(0xFF21B7CA),
-            foregroundColor: Colors.white,
+            backgroundColor: MyColor.secondary,
+            foregroundColor: MyColor.onSecondary,
             icon: Icons.receipt_long,
             label: 'Invoice',
           ),
@@ -335,7 +335,7 @@ class _UserOrderCartsState extends State<UserOrderCarts> {
                   );
                 },
                 backgroundColor: MyColor.myRed,
-                foregroundColor: MyColor.myWhite,
+                foregroundColor: MyColor.onPrimary,
                 icon: Icons.delete,
                 label: 'Delete',
               )
@@ -343,7 +343,7 @@ class _UserOrderCartsState extends State<UserOrderCarts> {
         child: SizedBox(
           height: 300,
           child: Card(
-            color: Colors.transparent,
+            color: MyColor.myTransparent,
             child: Row(
               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               // crossAxisAlignment: CrossAxisAlignment.center,

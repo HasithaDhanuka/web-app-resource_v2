@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage>
     return Background(
       backgroundURL: "img/background1.jpg",
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: MyColor.myTransparent,
         endDrawer: drawer(),
         key: scaffoldkey,
         body: Padding(
@@ -216,8 +216,8 @@ class _HomePageState extends State<HomePage>
   Widget drawer() {
     return Drawer(
       surfaceTintColor: MyColor.myOrange,
-      shadowColor: Colors.black,
-      backgroundColor: Colors.black,
+      shadowColor: MyColor.myBlack,
+      backgroundColor: MyColor.myBlack,
       child: ListView(
         children: [
               Container(

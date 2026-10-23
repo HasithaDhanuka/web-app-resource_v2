@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_app/Utils/colors.dart';
 
 //*********************************************//
 //#######     Rounded Elevated Button  ########//
@@ -10,7 +11,7 @@ Widget reUsableButton(
   return ElevatedButton(
     onPressed: onPressed,
     style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor: MyColor.myTransparent,
         shape: const StadiumBorder(),
         side: BorderSide(color: borderSideColor, width: 4)),
     child: Text(

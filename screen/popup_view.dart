@@ -26,7 +26,7 @@ Future<bool?> popUpItem(BuildContext context,
       context: context,
       builder: (context) => AlertDialog(
         insetPadding: const EdgeInsets.all(20),
-        backgroundColor: Colors.black,
+        backgroundColor: MyColor.myBlack,
         shadowColor: MyColor.myGreen,
         content: Container(
           height: 300,
@@ -85,7 +85,7 @@ Future<bool?> updateItem(
       context: context,
       builder: (context) => AlertDialog(
         insetPadding: const EdgeInsets.all(20),
-        backgroundColor: Colors.black,
+        backgroundColor: MyColor.myBlack,
         shadowColor: MyColor.myGreen,
         content: Container(
           height: 300,
@@ -133,7 +133,7 @@ Future<bool?> popupOrder({
         context: context,
         builder: (context) => AlertDialog(
               insetPadding: const EdgeInsets.all(10),
-              backgroundColor: Colors.black,
+              backgroundColor: MyColor.myBlack,
               content: SizedBox(
                 width: 400,
                 child: Consumer<TextFieldChanger>(
@@ -225,7 +225,7 @@ Future orderDetails({
         physics: const BouncingScrollPhysics(),
         child: AlertDialog(
           insetPadding: const EdgeInsets.all(10),
-          backgroundColor: Colors.black,
+          backgroundColor: MyColor.myBlack,
           content: Column(
             children: [
               SizedBox(
@@ -342,7 +342,7 @@ Future<bool?> orderFinished(
                   bottom: 200,
                   top: 200,
                 ),
-                backgroundColor: Colors.black,
+                backgroundColor: MyColor.myBlack,
                 content: SizedBox(
                   width: 400,
                   child: Column(
@@ -451,7 +451,7 @@ Future isSuccessPopup({
       desc: msg,
       btnOkOnPress: function,
       btnOkIcon: Icons.cancel,
-      btnOkColor: Colors.red,
+      btnOkColor: MyColor.myRed,
     ).show();
   }
 }

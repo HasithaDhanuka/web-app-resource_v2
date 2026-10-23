@@ -126,19 +126,19 @@ class _CreateItemState extends State<CreateItem> with TickerProviderStateMixin {
                 },
                 children: const <Widget>[
                   Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: EdgeInsets.all(12.0),
                     child: Text("වෙනත් වර්ග"),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: EdgeInsets.all(12.0),
                     child: Text("ධාන්‍ය වර්ග"),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: EdgeInsets.all(12.0),
                     child: Text("පිටි වර්ග"),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: EdgeInsets.all(12.0),
                     child: Text("පිසින කෑම"),
                   ),
                 ]),
@@ -300,7 +300,7 @@ class _CreateItemState extends State<CreateItem> with TickerProviderStateMixin {
         child: ElevatedButton(
           onPressed: modifyFunction,
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
+              backgroundColor: MyColor.myTransparent,
               shape: const StadiumBorder(),
               side: BorderSide(color: MyColor.myGreen, width: 4)),
           child: SizedBox(

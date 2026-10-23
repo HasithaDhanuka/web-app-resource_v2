@@ -13,7 +13,7 @@ Future<void> showOrderItemPickerSheet(
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
-    backgroundColor: Colors.black,
+    backgroundColor: MyColor.myBlack,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -107,7 +107,7 @@ class _OrderItemPickerSheetState extends State<OrderItemPickerSheet> {
               style: TextStyle(color: MyColor.myWhite),
               decoration: InputDecoration(
                 hintText: 'Search items',
-                hintStyle: const TextStyle(color: Colors.white60),
+                hintStyle: const TextStyle(color: MyColor.myWhite60),
                 prefixIcon: Icon(Icons.search, color: MyColor.myOrange),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -130,12 +130,12 @@ class _OrderItemPickerSheetState extends State<OrderItemPickerSheet> {
                   label: Text(_categories[index]),
                   selected: _selectedCategory == index,
                   onSelected: (_) => _selectCategory(index),
-                  selectedColor: MyColor.myRed,
-                  backgroundColor: Colors.white12,
+                  selectedColor: const Color.fromARGB(234, 218, 32, 25),
+                  backgroundColor: const Color.fromARGB(220, 8, 0, 0),
                   labelStyle: TextStyle(
                     color: _selectedCategory == index
                         ? MyColor.myWhite
-                        : const Color.fromARGB(103, 255, 255, 255),
+                        : const Color.fromARGB(218, 241, 233, 233),
                   ),
                 ),
               ),
@@ -183,7 +183,7 @@ class _OrderItemPickerSheetState extends State<OrderItemPickerSheet> {
                       final item = items[index];
                       final isOutOfStock = item.itemCount == 0;
                       return Card(
-                        color: Colors.white.withOpacity(0.06),
+                        color: MyColor.myWhite.withOpacity(0.06),
                         child: ListTile(
                           enabled: !isOutOfStock,
                           onTap: isOutOfStock
@@ -211,7 +211,7 @@ class _OrderItemPickerSheetState extends State<OrderItemPickerSheet> {
                             style: TextStyle(
                               color: isOutOfStock
                                   ? MyColor.myRed
-                                  : Colors.white70,
+                                  : MyColor.myWhite70,
                             ),
                           ),
                           trailing: Icon(
@@ -237,7 +237,7 @@ class _OrderItemPickerSheetState extends State<OrderItemPickerSheet> {
     final fallback = Container(
       width: 52,
       height: 52,
-      color: Colors.white12,
+      color: MyColor.myWhite12,
       alignment: Alignment.center,
       child: Icon(Icons.restaurant, color: MyColor.myOrange),
     );
@@ -251,6 +251,8 @@ class _OrderItemPickerSheetState extends State<OrderItemPickerSheet> {
         width: 52,
         height: 52,
         fit: BoxFit.cover,
+        // Fall back to an HTML image when browser byte access is blocked.
+        webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
         errorBuilder: (_, __, ___) => fallback,
       ),
     );

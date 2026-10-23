@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:web_app/Utils/colors.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:web_app/Utils/firebase_options.dart';
@@ -32,6 +33,68 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // Use semantic Material colors so controls remain legible across dark surfaces.
+  ThemeData _buildDarkTheme() {
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: MyColor.primary,
+      brightness: Brightness.dark,
+    ).copyWith(
+      primary: MyColor.primary,
+      onPrimary: MyColor.onPrimary,
+      secondary: MyColor.secondary,
+      onSecondary: MyColor.onSecondary,
+      tertiary: MyColor.tertiary,
+      error: MyColor.error,
+      onError: MyColor.onPrimary,
+      surface: MyColor.darkBackground,
+      onSurface: MyColor.myWhite,
+      outline: MyColor.outline,
+      surfaceTint: MyColor.primary,
+    );
+
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: MyColor.darkBackground,
+      canvasColor: MyColor.darkBackground,
+      dividerColor: MyColor.outline.withOpacity(0.55),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: MyColor.darkSurface,
+        foregroundColor: MyColor.myWhite,
+        surfaceTintColor: Colors.transparent,
+      ),
+      cardTheme: const CardThemeData(
+        color: MyColor.darkSurface,
+        surfaceTintColor: Colors.transparent,
+      ),
+      dialogTheme: const DialogThemeData(
+        backgroundColor: MyColor.darkSurface,
+        surfaceTintColor: Colors.transparent,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: MyColor.darkSurfaceRaised,
+        labelStyle: const TextStyle(color: MyColor.myWhite70),
+        hintStyle: const TextStyle(color: MyColor.myWhite60),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: MyColor.outline.withOpacity(0.75)),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: MyColor.primary, width: 2),
+        ),
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: MyColor.primary,
+        foregroundColor: MyColor.onPrimary,
+      ),
+      snackBarTheme: const SnackBarThemeData(
+        backgroundColor: MyColor.darkSurfaceRaised,
+        contentTextStyle: TextStyle(color: MyColor.myWhite),
+      ),
+    );
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -49,11 +112,7 @@ class MyApp extends StatelessWidget {
         PointerDeviceKind.unknown,
       }),
       title: 'セイロン味',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black12),
-        primarySwatch: Colors.red,
-        useMaterial3: true,
-      ),
+      theme: _buildDarkTheme(),
       home: const HomePage(),
     );
   }

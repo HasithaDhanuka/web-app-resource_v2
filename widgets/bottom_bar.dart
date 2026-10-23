@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_app/Utils/colors.dart';
 import 'package:web_app/widgets/custom_icon_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -16,7 +17,7 @@ class BottomBar extends StatelessWidget {
           child: Container(
             height: 2,
             width: screenWidth * 0.9,
-            color: Colors.black,
+            color: MyColor.outline,
           ),
         ),
         SizedBox(
@@ -32,26 +33,26 @@ class BottomBar extends StatelessWidget {
                     const CustomIconButton(
                         icondata: FontAwesomeIcons.github,
                         url: "https://github.com/HasithaDhanuka",
-                        color: Colors.blue),
+                        color: MyColor.myBlue),
                     SizedBox(
                       width: screenWidth * 0.02,
                     ),
                     const CustomIconButton(
                         icondata: FontAwesomeIcons.youtube,
                         url: "https://www.youtube.com/",
-                        color: Colors.blue),
+                        color: MyColor.myBlue),
                     SizedBox(
                       width: screenWidth * 0.02,
                     ),
                     const CustomIconButton(
                         icondata: FontAwesomeIcons.facebook,
                         url: "https://www.facebook.com/",
-                        color: Colors.blue),
+                        color: MyColor.myBlue),
                   ],
                 ),
                 const Text(
                   "Made with flutter web \u00a9 2021",
-                  style: TextStyle(color: Colors.black26),
+                  style: TextStyle(color: MyColor.myBlack26),
                 ),
               ],
             ),

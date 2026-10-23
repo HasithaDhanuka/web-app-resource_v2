@@ -105,8 +105,24 @@ class InvoiceView extends StatelessWidget {
           width: 400,
           child: Screenshot(
             controller: screenshotController,
-            child: invoiceBody(userName, userAddress, userTelNumber,
-                timeOfOrder, orderItem, orderPrice, deliveryCharge, totalAmount),
+            // Give the captured invoice an opaque white background.
+            child: Theme(
+              // Printed invoices stay light and legible even in the dark app.
+              data: ThemeData.light(useMaterial3: true),
+              child: Container(
+                color: MyColor.invoicePaper,
+                child: invoiceBody(
+                  userName,
+                  userAddress,
+                  userTelNumber,
+                  timeOfOrder,
+                  orderItem,
+                  orderPrice,
+                  deliveryCharge,
+                  totalAmount,
+                ),
+              ),
+            ),
           ),
         ),
       ),
